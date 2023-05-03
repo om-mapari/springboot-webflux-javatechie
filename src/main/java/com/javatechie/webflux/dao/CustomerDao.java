@@ -28,10 +28,12 @@ public class CustomerDao {
                 .collect(Collectors.toList());
     }
     public Flux<Customer> getCustomersStream() {
-        return Flux.range(1,50)
+        return Flux.range(1,10)
                 .delayElements(Duration.ofSeconds(1))
                 .doOnNext((i) -> System.out.println("processing count in stream: " + i))
-                .map(i-> new Customer(i,"customer "+ i ));
+                .map(i-> new Customer(i,"customer "+ i ))
+                .log();
 
     }
+
 }
